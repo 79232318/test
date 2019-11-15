@@ -1,0 +1,8 @@
+1.使用 @ ExceptionHandler注解 --> 进行异常处理的方法必须与出错的方法在同一个Controller里面
+2.实现 HandlerExceptionResolver 接口 -->这种方式可以进行全局的异常控制
+3.使用 @ControllerAdvice+ @ ExceptionHandler 注解 -->上文说到 @ ExceptionHandler 需要进行异常处理的方法必须与出错的方法在同一个Controller里面。
+                              					那么当代码加入了 @ControllerAdvice，则不需要必须在同一个 controller 中了。
+                              					这也是 Spring 3.2 带来的新特性。从名字上可以看出大体意思是控制器增强。 也就是说，
+                              					@controlleradvice + @ ExceptionHandler 也可以实现全局的异常捕捉。
+                              					
+使用第三种会使第二种失效。第一种不会。

@@ -1,0 +1,81 @@
+目录切换命令
+	 cd ../或cd .. 切换到上个目录
+	 cd - 切换到上一个操作所在目录
+	 cd ~ 切换到用户目录
+	 cd / 切换到根目录
+	 cd usr/local 切换到指定目录
+目录操作命令（增删改查）
+	 mkdir 目录名  ：增
+	 ls或ll ：查 （-lht 查看文件大小； -aht）
+	 find 目录 参数 ：查（find .; find /home -name "*.txt"; find /name -iname "*.txt"(不分大小写);  ）
+	 mv 目录名称原名 (新位置)目录名称新名 ： 改
+	 cp -r 目录名称 目录拷贝的目标位置 ：改（-r代表递归拷贝）
+	 rm [-rf] 目录 : 删
+文件操作命令 （增删改查）
+     touch 文件名称 ：增
+     cat/more/less/tail 文件名：查
+        cat： 查看显示文件内容
+		more： 可以显示百分比，回车可以向下一行， 空格可以向下一页，q可以退出查看
+		less： 可以使用键盘上的PgUp和PgDn向上 和向下翻页，q结束查看
+		tail-10 ： 查看文件的后10行，Ctrl+C结束 （还可以tail -f *.log 实时查看日志）
+	 vim 文件名称：改
+	    vim 文件------>进入文件----->命令模式------>按i进入编辑模式----->编辑文件 ------->按Esc进入底行模式----->输入：wq/q! （输入wq代表写入内容并退出，即保存；输入q!代表强制退出不保存。）
+	 rm -rf 文件 ： 删   
+压缩文件的操作命令	 
+            压缩
+        tar -zcvf 打包压缩后的文件名 要打包压缩的文件
+        	z：调用gzip压缩命令进行压缩
+			c：打包文件
+			v：显示运行过程
+			f：指定文件名  
+		          比如：假如test目录下有三个文件分别是：aaa.txt bbb.txt ccc.txt，如果我们要打包test目录并指定压缩后的压缩包名称为test.tar.gz可以使用命令：
+		          tar -zcvf test.tar.gz aaa.txt bbb.txt ccc.txt或：tar -zcvf test.tar.gz /test/
+            解压
+        tar [-xvf] 压缩文件 
+            x：代表解压
+            tar -xvf test.tar.gz 
+            tar -xvf test.tar.gz -C /usr（- C代表指定解压的位置）
+权限命令
+     drwxr-xr-x. 
+                    文件类型  
+	        d： 代表目录
+			-： 代表文件
+			l： 代表软链接（可以认为是window中的快捷方式）
+		Linux中权限分为以下几种：
+	        r：代表权限是可读，r也可以用数字4表示
+			w：代表权限是可写，w也可以用数字2表示
+			x：代表权限是可执行，x也可以用数字1表示
+	 修改文件/目录的权限的命令 ：chmod
+	    chmod u=rwx,g=rw,o=r aaa.txt -> chmod 764 aaa.txt
+	    
+	 设置开机自启   
+	    chmod +x 脚本名
+	    chkconfig --add 脚本名
+	          查看  chkconfig --list
+Linux 用户管理
+     	useradd 选项 用户名:添加用户账号
+		userdel 选项 用户名:删除用户帐号
+		usermod 选项 用户名:修改帐号
+		passwd 用户名:更改或创建用户的密码
+		passwd -S 用户名 :显示用户账号密码信息
+		passwd -d 用户名: 清除用户密码	          
+Linux系统用户组的管理	  
+		groupadd 选项 用户组 :增加一个新的用户组
+		groupdel 用户组:要删除一个已有的用户组
+		groupmod 选项 用户组 : 修改用户组的属性  
+其他常用命令
+    pwd： 显示当前所在位置
+	sudo + 其他命令：以系统管理者的身份执行指令，也就是说，经由 sudo 所执行的指令就好像是 root 亲自执行。
+	grep 要搜索的字符串 要搜索的文件 --color： 搜索命令，--color代表高亮显示
+	ps -ef/ps -aux： 这两个命令都是查看当前系统正在运行进程，两者的区别是展示格式不同。如果想要查看特定的进程可以使用这样的格式：ps aux|grep redis （查看包括redis字符串的进程），也可使用 pgrep redis -a。
+					注意：如果直接用ps（（Process Status））命令，会显示所有进程的状态，通常结合grep命令查看某进程的状态。
+	kill -9 进程的pid： 杀死进程（-9 表示强制终止。）先用ps查找进程，然后用kill杀掉
+网络通信命令：
+	查看当前系统的网卡信息：ifconfig
+	查看与某台机器的连接情况：ping
+	查看当前系统的端口使用：netstat -an
+	net-tools 和 iproute2 ： net-tools起源于BSD的TCP/IP工具箱，后来成为老版本Linux内核中配置网络功能的工具。但自2001年起，Linux社区已经对其停止维护。同时，一些Linux发行版比如Arch Linux和CentOS/RHEL 7则已经完全抛弃了net-tools，只支持iproute2。linux ip命令类似于ifconfig，但功能更强大，旨在替代它。更多详情请阅读如何在Linux中使用IP命令和示例
+	shutdown： shutdown -h now： 指定现在立即关机；shutdown +5 "System will shutdown after 5 minutes"：指定5分钟后关机，同时送出警告信息给登入用户。
+	reboot： reboot： 重开机。reboot -w： 做个重开机的模拟（只有纪录并不会真的重开机）。
+   
+            

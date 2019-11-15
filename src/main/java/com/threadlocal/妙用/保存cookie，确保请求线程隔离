@@ -1,0 +1,1 @@
+类似一次 HTTP 请求线程中，利用 ThreadLocal 存储 Cookie 对象，进行状态管理。set Cookie：

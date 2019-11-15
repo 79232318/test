@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bingfa.SerialNumberDao" >
+      
+	   <select id="findByDateAndStatus" resultType="SerialNumber">
+	   
+	     SELECT * from serial_number where date = #{date} and status=#{status} for update
+	   </select>
+	   <insert id="save" parameterType="SerialNumber">
+	   INSERT INTO `serial_number` (`id`,`date`, `number`, `status`) VALUES (#{s.id}, #{s.date}, #{s.number}, #{s.status})
+	   on duplicate key update
+	   date = values(date),
+	   number = values(number),
+	   status = values(status)
+	   </insert>
+</mapper>

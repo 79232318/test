@@ -1,0 +1,17 @@
+比如一次请求线程进来，业务 Dao 需要更新 user 表和 user-detail 表。如果是 new 出两个数据库 Connection ，分别不同的 Connection 操作 user 表和 user-detail 表，就无法保证事务。那么数据库连接池是如何保证的？
+
+答案是：利用 ThreadLocal 存储唯一 Connection 对象。每次请求线程，pool.getConnection 获取连接的时候都会这样操作：
+
+会从 ThreadLocal 获取 Connection 对象。如果有，则保证了后面多个数据库操作共用同一个 Connection ，从而保证了事务。
+如果没有，往 ThreadLocal 新增Connection 对象，并返回到线程
+错误的做法
+public class XXXService {
+
+    private Connection conn;
+}
+因为 conn 是线程不安全的。这样会导致多个请求公用一个连接。请求量很大的情况下，延迟各种。你懂。
+
+因此，使用 ThreadLocal 保证每个请求线程的 Connection 是唯一的。即每个线程有自己的连接。
+
+继续讲到 Spring 框架，在事务开始时，会给当前线程一个Jdbc Connection,在整个事务过程，都是使用该线程绑定的connection来执行数据库操作，实现了事务的隔离性。Spring框架里面就是用的ThreadLocal来实现这种隔离
+ 

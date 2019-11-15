@@ -1,0 +1,3 @@
+比如你访问百度、我访问百度，会有不同 Cookie 。而且你不能访问我的 Cookie，我也不能。顾名思义，使用 ThreadLocal 保证每个 HTTP 请求线程的 Cookie 是唯一的。
+
+Cookie 这样才能做 Session 等状态管理
