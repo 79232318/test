@@ -1,0 +1,22 @@
+通过下面三个简单的示例认识 for 循环语句最基本的使用，实际上 for 循环语句的功能比下面你看到的示例展现的要大得多。
+输出当前列表中的数据：
+	for loop in 1 2 3 4 5
+	do
+	    echo "The value is: $loop"
+	done
+	
+产生 10 个随机数：
+
+	#!/bin/bash
+	for i in {0..9};
+	do 
+	   echo $RANDOM;
+	done
+输出1到5:
+
+通常情况下 shell 变量调用需要加 $,但是 for 的 (()) 中不需要,下面来看一个例子：
+
+	#!/bin/bash
+	for((i=1;i<=5;i++));do
+	    echo $i;
+	done;

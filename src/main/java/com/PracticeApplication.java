@@ -29,6 +29,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+ 
 @EnableAspectJAutoProxy(proxyTargetClass=true)
 @SpringBootApplication
 @MapperScan("com.bingfa")
@@ -36,7 +37,7 @@ public class PracticeApplication extends SpringBootServletInitializer implements
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext run = SpringApplication.run(PracticeApplication.class, args);
-		test(run);
+//		test(run);
 	}
 	public static void test(ConfigurableApplicationContext run){
         RequestMappingHandlerMapping bean1 = run.getBean(RequestMappingHandlerMapping.class);

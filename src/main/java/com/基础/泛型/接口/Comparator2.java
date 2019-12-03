@@ -15,11 +15,11 @@ public interface Comparator2<T> {
 class InterC1<A> implements Comparator2{
 	@Override
 	public void test(Object t) {//类型是父类的
-		System.out.println(this.MAX_VALUE); //父类的  
+		System.out.println(MAX_VALUE); //父类的  
 	}
     
 }
-class InterC2<Integer> implements Comparator2<Integer>{
+class InterC2 implements Comparator2<Integer>{
     @Override
     public void test(Integer t) { //类型是父类的
         

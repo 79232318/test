@@ -15,7 +15,12 @@
 	<description>practice for Spring Boot</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+        <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
+        <thymeleaf-layout-dialect.version>2.0.3</thymeleaf-layout-dialect.version>
 	</properties>
 
 	<dependencies>
@@ -61,6 +66,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.14.8</version>
+            
         </dependency>
         <!-- web -->
          <dependency>
@@ -100,12 +106,7 @@
 		    <artifactId>easypoi-annotation</artifactId>
 		    <version>3.2.0</version>
 		</dependency>
-		<!-- lombok -->
-		<dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.14.8</version>
-        </dependency>
+		
         <!-- mybatis -->
         <dependency>
         	<groupId>org.mybatis.spring.boot</groupId>
@@ -154,9 +155,103 @@
 			    <artifactId>netty-all</artifactId>
 			    <version>4.1.42.Final</version>
 			</dependency>
-
+			<!-- actuator -->
+			  <dependency>
+			    <groupId>org.springframework.boot</groupId>
+			    <artifactId>spring-boot-starter-web</artifactId>
+			  </dependency>
+			  <dependency>
+			      <groupId>org.springframework.boot</groupId>
+			      <artifactId>spring-boot-starter-actuator</artifactId>
+			  </dependency>
+			   <!-- sleuth -->
+		 <dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
+		<!-- zipkin  -->
+        <dependency>
+             <groupId>io.zipkin.brave</groupId>
+              <artifactId>brave-core</artifactId>
+              <version>3.9.0</version>
+          </dependency>
+<!--      <dependency>
+             <groupId>io.zipkin.reporter</groupId>
+             <artifactId>zipkin-reporter-urlconnection</artifactId>
+             <version>0.2.0</version>
+          </dependency>
+          -->
+          <dependency>
+              <groupId>io.zipkin.brave</groupId>
+              <artifactId>brave-spancollector-http</artifactId>
+             <version>3.9.0</version>
+         </dependency>
+         <dependency>
+             <groupId>io.zipkin.brave</groupId>
+              <artifactId>brave-web-servlet-filter</artifactId>
+              <version>3.9.0</version>
+         </dependency>
+         <dependency>
+             <groupId>io.zipkin.brave</groupId>
+             <artifactId>brave-okhttp</artifactId>
+             <version>3.9.0</version>
+         </dependency>
+         <!-- springboot shiro 所需 -->
+         <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+        
+	    </dependency>
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+	    </dependency>
+	    <dependency>
+	        <groupId>net.sourceforge.nekohtml</groupId>
+	        <artifactId>nekohtml</artifactId>
+	        <version>1.9.22</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-web</artifactId>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.apache.shiro</groupId>
+	        <artifactId>shiro-spring</artifactId>
+	        <version>1.4.0</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>mysql</groupId>
+	        <artifactId>mysql-connector-java</artifactId>
+	        <scope>runtime</scope>
+	    </dependency>
+	    <!-- springboot中加入Hystrix -->
+	    <dependency>
+		    <groupId>com.netflix.hystrix</groupId>
+		    <artifactId>hystrix-metrics-event-stream</artifactId>
+		    <version>1.5.12</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.netflix.hystrix</groupId>
+		    <artifactId>hystrix-javanica</artifactId>
+		    <version>1.5.12</version>
+		</dependency>
 	</dependencies>
-
+	
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			
+		
+		</dependencies>
+	</dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>

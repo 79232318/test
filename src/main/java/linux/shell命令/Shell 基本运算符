@@ -1,0 +1,8 @@
+加法        +            `expr $a + $b`结果为30
+减法        -            `expr $a - $b`结果为-10
+乘法        *            `expr $a \* $b`
+除法        /             `expr $a / $b` 
+取余        %            `expr $a % $b` 
+赋值        =            a=$b
+相等        ==           [$a == $b] false 
+不等       !=            [$a != $b] true

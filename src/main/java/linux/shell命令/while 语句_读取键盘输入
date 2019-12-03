@@ -1,0 +1,24 @@
+基本的 while 循环语句：
+	#!/bin/bash
+	int=1
+	while(( $int<=5 ))
+	do
+	    echo $int
+	    let "int++"
+	done
+while循环可用于读取键盘信息：
+	echo '按下 <CTRL-D> 退出'
+	echo -n '输入你最喜欢的电影: '
+	while read FILM
+	do
+	    echo "是的！$FILM 是一个好电影"
+	done
+输出内容:
+	按下 <CTRL-D> 退出
+	输入你最喜欢的电影: 变形金刚
+	是的！变形金刚 是一个好电影
+无限循环：
+	while true
+	do
+	    command
+	done

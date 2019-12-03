@@ -1,0 +1,17 @@
+使用方式很简单，比如我们定义好了一个文件路径file="/usr/learnshell/test.sh" 如果我们想判断这个文件是否可读，
+可以这样if [ -r $file ] 如果想判断这个文件是否可写，可以这样-w $file，是不是很简单
+
+-b file     [-b $file]     检查文件是否是块设备文件，是true
+-c file     [-c $file]     检查文件是否是字符设备文件，是true
+-d file     [-d $file]     检查文件是否是目录，是true
+-f file     [-f $file]     检查文件是否是普通文件（既不是目录，也不是设备文件），是true
+-g file     [-g $file]     检查文件是否设置了SGID位，是true
+-k file     [-k $file]     检查文件是否设置了粘着为（sticky bit），是true
+-p file     [-p $file]     检查文件是否是有名通道，是true
+-u file     [-u $file]     检查文件是否设置了suid位，是true
+-r file     [-r $file]     检查文件是否可读，是true
+-w file     [-w $file]     检查文件是否可写，是true
+-x file     [-x $file]     检查文件是否可执行，是true
+-r file     [-r $file]     检查文件是否可读，是true
+-s file     [-s $file]     检查文件是否为空，不为空true
+-e file     [-e $file]     检查文件（包括目录）是否存在，是true

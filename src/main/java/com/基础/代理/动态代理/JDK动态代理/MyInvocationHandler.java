@@ -10,7 +10,7 @@ public class MyInvocationHandler implements InvocationHandler {
 	
 	public MyInvocationHandler(Object target) {
 		
-		super();
+	
 		this.target = target;
 		
 	}
