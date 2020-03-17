@@ -1,0 +1,15 @@
+通常来说，只要你设置了如下所示的 JVM 参数：
+
+-XX:+HeapDumpOnOutOfMemoryError
+
+JVM 就会在发生内存泄露时抓拍下当时的内存状态，也就是我们想要的堆转储文件。
+
+如果你不想等到发生崩溃性的错误时才获得堆转储文件，也可以通过设置如下 JVM 参数来按需获取堆转储文件。
+
+-XX:+HeapDumpOnCtrlBreak
+
+除此之外，还有很多的工具，例如 JMap，JConsole 都可以帮助我们得到一个堆转储文件。使用jmap获取heap dump的命令如下：
+
+jmap -dump:format=b,file=<dumpfile> <pid>
+
+解释：format=b-->指定格式为二进制；file=<dumpfile>-->指定文件名称，自定义；<pid> -->进程id

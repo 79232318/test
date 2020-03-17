@@ -1,0 +1,8 @@
+通常情况下，把子查询优化为join查询，但在优化时要注意关联建是否有一对多的关系，要注意重复数据
+如：
+	查询sandra出演的所有影片
+	explain select title,release_year,Length
+	from film
+	where film_id in(
+		select film_id from film_actor where actor_id in(
+			select actor_id from actor where first_name = 'sandra'))

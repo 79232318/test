@@ -1,0 +1,10 @@
+#是否开启了慢查询日志
+show variables like 'slow_query_log'
+#设置日志保存路径
+set global slow_query_log_file = '/home/mysql/sql_log/mysql_slow.log'
+#设置是否将没有使用索引的查询记录
+set global log_queries_not_using_indexes = on
+#大于多少秒的查询记录
+set global long_query_time = 1
+#开启慢查询
+set global slow_query_log = on

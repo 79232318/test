@@ -1,4 +1,4 @@
-package com.运行顺序;
+package com.初始化运行顺序;
  
 /**
  * 有继承关系的类初始化顺序

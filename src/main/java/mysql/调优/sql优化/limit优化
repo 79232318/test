@@ -1,0 +1,9 @@
+优化limit查询
+	limit常用于分页处理，时常会伴随orderby从句使用，因此大多数时候会使用filesorts这样会造成大量的io问题
+	
+	explain select film_id，description from sakila.film orderby title limit 50,5
+	
+	优化步骤1：使用有索引的列或主键进行order by操作
+	explain select film_id，description from sakila.film orderby film_id limit 50,5
+	优化步骤2：记录上次返回的主键，在下次查询时使用主键过滤
+	explain select film_id，description from sakila.film where film_id >55 and film_id < 60 orderby film_id limit 1,5

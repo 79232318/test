@@ -11,7 +11,9 @@ import javax.sql.DataSource;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -33,8 +35,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableAspectJAutoProxy(proxyTargetClass=true)
 @SpringBootApplication
 @MapperScan("com.bingfa")
+@EnableCaching
 public class PracticeApplication extends SpringBootServletInitializer implements TransactionManagementConfigurer{
 
+ 
+	
+ 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext run = SpringApplication.run(PracticeApplication.class, args);
 //		test(run);

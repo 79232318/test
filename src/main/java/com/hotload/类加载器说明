@@ -1,0 +1,17 @@
+官方定义的Java类加载器有 BootstrapClassLoader、ExtClassLoader、AppClassLoader。
+这三个类加载器分别负责加载不同路径的类的加载。并形成一个父子结构。
+
+	类加载器名称				负责加载目录
+	BootstrapClassLoader	处于类加载器层次结构的最高层，负责 sun.boot.class.path 路径下类的加载，默认为 jre/lib 目录下的核心 API 或 -Xbootclasspath 选项指定的 jar 包
+	ExtClassLoader			加载路径为 java.ext.dirs，默认为 jre/lib/ext 目录或者 -Djava.ext.dirs 指定目录下的 jar 包加载
+	AppClassLoader			加载路径为 java.class.path，默认为环境变量 CLASSPATH 中设定的值。也可以通过 -classpath 选型进行指定
+
+默认情况下，例如我们使用关键字new或者Class.forName都是通过AppClassLoader类加载器来加载的
+
+正因为是此父子结构，所以默认情况下如果要加载一个类，会优先将此类交给其父类进行加载（直到顶层的BootstrapClassLoader也没有），
+如果父类都没有，那么才会将此类交给子类加载。这就是类加载器的双亲委派规则
+（MyClassLoader.java）
+为什么要先获取ExtClassLoader类加载器呢？其实这里是借鉴了Tomcat里面的设计，是为了避免我们自定义的类加载器覆盖了一些核心类。例如java.lang.Object。
+为什么是获取ExtClassLoader类加载器而不是获取AppClassLoader呢？这是因为如果我们获取了AppClassLoader进行加载，那么不还是双亲委派的规则了吗
+
+****************位于不同 ClassLoader 中名称一样的类实际上是不同的类

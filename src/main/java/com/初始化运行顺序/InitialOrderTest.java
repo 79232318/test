@@ -1,4 +1,4 @@
-package com.运行顺序;
+package com.初始化运行顺序;
  
 /**
  * 类的初始化顺序
@@ -18,7 +18,7 @@ public class InitialOrderTest {
   
     // 静态初始化块 
     static {   
-        System.out.println(staticField);   
+    	System.out.println(staticField);   
         System.out.println("静态初始化块");   
     }   
   

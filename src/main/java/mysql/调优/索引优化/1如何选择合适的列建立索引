@@ -1,0 +1,9 @@
+1在where从句，groupby从句，orderby从句，on从句中出现的列
+2索引字段越小越好
+3离散度大的列放到联合索引的前面
+	select * from payment where stadd_id =2 and customer_id = 584
+	是index（staff_id,customer_id）好？还是index（customer_id,staff_id）
+	
+	首先查：select count(distinct customer_id),count(staff_id) from payment;
+	      谁大谁在前面，就是离散度大
+	

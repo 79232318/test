@@ -1,0 +1,5 @@
+insert into aas (pid) values (UNIX_TIMESTAMP('2014-06-01 13:12:00'));
+
+select FROM_UNIXTIME(pid,"%Y-%m-%d %H:%i:%s") from aas where id = 86
+
+select FROM_UNIXTIME(pid) from aas where id = 86

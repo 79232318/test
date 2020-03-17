@@ -1,0 +1,22 @@
+查询最后支付时间-优化max（）函数
+
+explain select max(payment_date) from payment \G
+
+优化加入索引
+create index idx_paydate on payment(payment_date);
+
+再次查询
+
+因为索引是顺序排序的，所以。。
+
+在一条sql中同时查出2006年和2007年电影的数量-优化count（）函数
+
+select count(release_year= '2006' or release_year = '2007') from film;
+	这样查询出来的是一起的，不是分开的
+正确方式：
+	select count(release_year='2006' or null) as '2006年电影数量',
+	       count(release_year='2007' or null) as '2007年电影数量'
+	from film;	
+	
+count(*) 跟 count(id) 区别
+	count(*) null值有计算

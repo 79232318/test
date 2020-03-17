@@ -1,0 +1,7 @@
+GC shortname		回收区域	JVM参数					描述
+Copy				新生代	-XX:+UseSerialGC		即Serial收集器，使用复制算法，单线程。sun jdk默认的gc
+MarkSweepCompact	老生代	-XX:+UseSerialGC		即Serial old，Serial收集器的老年代版本，使用标记-清除算法，单线程。sun jdk默认的gc
+ParNew				新生代	-XX:+UseParNewGC		Serial收集器的多线程版本。
+ConcurrentMarkSweep	老生代	-XX:+UseConcMarkSweepGC	Serial old收集器的多线程版本。（能否与ParNew一块使用，我待会试一下再说）
+PS Scavenge			新生代	-XX:+UseParallelGC		虽然跟ParNew一样都是采用复制算法的多线程gc收集器。但其具有可以配置吞吐量优先的特点和自适应调节新生代大小、eden与survivor比例等功能。它关注吞吐量，所以可以更高效率地利用cpu，而ParNew更关注停顿时间，适合需要与用户交互的程序。
+PS MarkSweep		老生代	-XX:+UseParallelGC		PS Scavenge的老年代版本。标记-整理算法、多线程，并且支持吞吐量优先以及自适应。

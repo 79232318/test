@@ -1,0 +1,5 @@
+利用inet_aton(),inet_ntoa()两个函数来转换,varchar 15字节 -> bigint 8字节
+
+insert into aas(pid) values(inet_aton('192.168.0.1'))
+
+select inet_ntoa(pid) from aas where id =

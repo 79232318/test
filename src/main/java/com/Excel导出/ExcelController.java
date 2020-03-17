@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ExcelController {
 
-	 @RequestMapping(value = "/")
+	 @RequestMapping(value = "/excel")
 	    public void getname(HttpServletResponse response) throws Exception {
 	        List<StudentEntity> list = new ArrayList<>();
 	        StudentEntity studentEntity = new StudentEntity("a","路飞",1,new Date(),new Date());

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="false">
+    <defaultCache
+            eternal="false"   
+            maxElementsInMemory="1000"
+            overflowToDisk="false"
+            diskPersistent="false"
+            timeToIdleSeconds="0"
+            timeToLiveSeconds="600"
+            memoryStoreEvictionPolicy="LRU" />
+
+  <!-- timeToIdleSeconds表示最大空闲的时间，timeToLiveSeconds表示最大存活时间 -->
+  <!-- 2个参数，一个为0，只看另外一个。2个都不为0，2个条件都要满足 0 0 永久存活-->
+  <!-- 说明：最大空闲时间满足就不失效（为0就标识空闲时间不检测）
+                   最大存活时间满足就失效（为0就不再检测存活时间） -->
+    <!-- 这里的 users 缓存空间是为了下面的 demo 做准备 -->
+    <cache
+            name="users"
+            eternal="false"
+            maxElementsInMemory="100"
+            overflowToDisk="false"
+            diskPersistent="false"
+            timeToIdleSeconds="0"
+            timeToLiveSeconds="0"
+            memoryStoreEvictionPolicy="LRU" />
+</ehcache>

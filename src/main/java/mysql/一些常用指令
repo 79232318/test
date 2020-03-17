@@ -1,0 +1,3 @@
+查看MySQL提供的所有存储引擎  show engines;
+
+查看默认的存储引擎。 show variables like '%storage_engine%';

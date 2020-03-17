@@ -1,0 +1,20 @@
+pt-query-digest工具
+
+输出到文件
+   pt-query-digest slow-log > slow_log.report
+输出到数据库表
+   pt-query-digest slow.log -review \
+   h=127.0.0.1,D=test,p=root,P=3306,u=root,t=query_review \
+   --create-reviewtable \
+   --review-history t= hostname_slow
+   
+   -review 将慢查询日志信息放到某个表
+   --create-reviewtable 建立慢查询日志的临时表
+使用方式
+	pt-query-digest --help 
+	pt-query-digest /home/.../slow.log | more
+发现有问题的sql     
+	1.查询次数多且每次查询占用时间长的sql，通常为pt-query-digest分析的前几个查询
+	2.IO大的sql，注意pt-query-digest分析中的Rows examine项
+	3.未命中索引的sql，注意pt-query-digest分析中Rows examine（扫描行数） 和Rows send（返回行数）的对比
+	

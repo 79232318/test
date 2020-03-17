@@ -1,0 +1,6 @@
+
+# Time：140712 8:33:19 -> 查询执行时间
+# User@Host： root[root] @localhost [] ->查询执行的主机
+# Query_time: 0.000493 Lock_time: 0.000126 Rows_sent: 3 Rows_examined: 3 ->SQL的执行信息
+SET timestamp=1405125199; ->sql执行时间
+sql语句

@@ -1,0 +1,22 @@
+在linux系统下， 大多数情况下mysql配置文件位于/etc/my.cnf或是/etc/mysql/my.cnf
+在windows系统配置文件位于c:/windows/my.ini文件，
+mysql查找配置文件的顺序可以通过一下方法获得
+	$ /usr/sbin/mysqld --verbose --help |greo -A 1 'default options'
+	注意：如果存在多个配置文件，则后面的会覆盖前面的
+
+一些常用参数说明
+	innodb_buffer_pool_size
+	非常重要的一个参数，用于配置innodb的缓冲池，如果数据库单独运行与服务器，推荐为总内存75%
+	innodb_buffer_pool_instances(5.5后)
+	可以控制缓冲池的个数，默认情况下只有一个缓冲池
+	innodb_flush_log_at_trx_commit
+	关键参数，对innodb的io效率影响很大，默认值为1，可以取0,1,2三个值，一般建议设为2，如果安全性比较高使用默认值1
+	innodb_read_io_threads
+	innodb_write_io_threads
+	这个两个参数决定了innodb读写的io进程数，默认为4
+	innodb_file_per_table
+	关键参数，控制innodb每一个表使用独立的表空间，默认为off，也就是所有表都会建立在共享表空间中
+	innodb_stats_on_metadata
+	决定了mysql在什么情况下会刷新innodb表的统计信息
+	
+
