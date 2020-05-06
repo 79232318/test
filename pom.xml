@@ -246,6 +246,12 @@
           <groupId>net.sf.ehcache</groupId>
           <artifactId>ehcache</artifactId>
       </dependency>
+      <!-- 查看object的结构 -->
+      <dependency>
+          <groupId>org.openjdk.jol</groupId>
+          <artifactId>jol-core</artifactId>
+          <version>0.10</version>
+      </dependency>
 	</dependencies>
 	
 	

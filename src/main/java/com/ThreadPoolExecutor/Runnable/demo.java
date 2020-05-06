@@ -11,6 +11,7 @@ package com.ThreadPoolExecutor.Runnable;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 /**  
 * <p>Description: </p>
@@ -56,8 +57,7 @@ public class demo {
 	        while (!executor.isTerminated()) {
 	        }
 	        System.out.println("Finished all threads");
-				
-
+	         
 	}
 
 }

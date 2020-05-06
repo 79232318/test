@@ -33,7 +33,7 @@ public class LogFilter extends OncePerRequestFilter {
 		MyHttpRequestWrapper request = new MyHttpRequestWrapper(req);
 		MyHttpResponseWrapper response = new MyHttpResponseWrapper(resp);
 		filterChain.doFilter(request, resp);
-		consoleReq(request);
+//		consoleReq(request);
 
 //		consoleResp(response,resp);
 		 

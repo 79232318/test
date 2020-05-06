@@ -23,19 +23,29 @@ public class test {
 			@Override
 			public void run() {
 				 
-					service.update1();
+					try {
+						service.update1();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				 
 				
 			}
-		}).start();
+		},"diyi").start();
         new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
-					service.update2();
+					try {
+						service.update3();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				
 			}
-		}).start();
+		},"dier").start();
 	}
 	@Test
 	public void contextLoads1() {

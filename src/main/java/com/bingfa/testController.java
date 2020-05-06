@@ -51,4 +51,36 @@ public class testController {
 		demo demo = new demo();
 		service.insert1(demo);
 	}
+	@RequestMapping("demo2")
+	public void test2() {
+		System.out.println("开始测试");
+new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				 
+					try {
+						service.update1();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				 
+				
+			}
+		},"diyi").start();
+        new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+					try {
+						service.update3();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				
+			}
+		},"dier").start();
+	}
 }

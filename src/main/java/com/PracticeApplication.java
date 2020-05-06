@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -29,6 +30,8 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import com.spring.springboot.peizhi.TestProperties;
+
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
  
@@ -39,11 +42,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class PracticeApplication extends SpringBootServletInitializer implements TransactionManagementConfigurer{
 
  
-	
  
 	public static void main(String[] args) {
 		ConfigurableApplicationContext run = SpringApplication.run(PracticeApplication.class, args);
-//		test(run);
 	}
 	public static void test(ConfigurableApplicationContext run){
         RequestMappingHandlerMapping bean1 = run.getBean(RequestMappingHandlerMapping.class);

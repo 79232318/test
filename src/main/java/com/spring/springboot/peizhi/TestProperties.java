@@ -30,6 +30,11 @@ public class TestProperties {
 	public void setMyName(String myName) {
 		this.myName = myName;
 	}
+
+	public TestProperties() {
+		super();
+		System.out.println("111111111111111");
+	}
 	
 	
 }

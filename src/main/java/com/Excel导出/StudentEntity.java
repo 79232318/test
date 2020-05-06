@@ -42,4 +42,10 @@ public class StudentEntity implements Serializable {
         this.birthday = birthday;
         this.registrationDate = registrationDate;
     }
+
+	public StudentEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+    
 }

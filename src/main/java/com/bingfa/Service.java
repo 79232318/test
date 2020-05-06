@@ -8,8 +8,10 @@
 */  
 package com.bingfa;
 
+import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -35,27 +37,28 @@ public class Service {
 	private DemoRepository demoRepository;
 	
 	@Transactional
-	public void update1()  {
-		demo demo = demoRepository.findById(1L).get();
-		 
-			System.out.println("我的年龄是"+demo.getAge()+"岁,我将要长大一岁");
-			demo.setAge(demo.getAge() + 1);
-			
-			 
-			
-			try {
-				Thread.sleep(120);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			demoRepository.save(demo);
-			System.out.println("我现在长大了"+demo.getAge()+"岁");
-			System.out.println(demo.toString());
-			demo demo1 = demoRepository.findById(2L).get();
-			demo1.setAge(demo1.getAge() + 1);
-			demoRepository.save(demo1);
-		 
+	public void update1() throws InterruptedException  {
+		
+		int i = demoRepository.update();
+		System.out.println(Thread.currentThread().getName() + "的i为"+i);
+		System.out.println("休息10s");
+		Thread.sleep(1000*10);
+		if(i > 0) {
+			List<demo> list  = demoRepository.findAlll();
+			System.out.println(Thread.currentThread().getName() + "的list为"+list);
+		}
+	}
+	@Transactional
+	public void update3() throws InterruptedException  {
+		
+		int i = demoRepository.update();
+		System.out.println(Thread.currentThread().getName() + "的i为"+i);
+		System.out.println("休息10s");
+		Thread.sleep(1000*10);
+		if(i > 0) {
+			List<demo> list  = demoRepository.findAlll();
+			System.out.println(Thread.currentThread().getName() + "的list为"+list);
+		}
 	}
 	@Transactional
 	public void update2(){
