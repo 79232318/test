@@ -1,0 +1,13 @@
+锁粗化的概念应该比较好理解，就是将多次连接在一起的加锁、解锁操作合并为一次，将多个连续的锁扩展成一个范围更大的锁。举个例子：
+package com.paddx.test.string;
+
+public class StringBufferTest {
+    StringBuffer stringBuffer = new StringBuffer();
+
+    public void append(){
+        stringBuffer.append("a");
+        stringBuffer.append("b");
+        stringBuffer.append("c");
+    }
+}
+　　这里每次调用stringBuffer.append方法都需要加锁和解锁，如果虚拟机检测到有一系列连串的对同一个对象加锁和解锁操作，就会将其合并成一次范围更大的加锁和解锁操作，即在第一次append方法时进行加锁，最后一次append方法结束后进行解锁。

@@ -1,4 +1,4 @@
-package tool.openjdk_jol;
+package read_source.锁.synchronized详解;
 
 import org.openjdk.jol.info.ClassLayout;
 /**
@@ -85,25 +85,29 @@ JVM一般是这样使用锁和Mark Word的：
  * @author user
  *
  */
-public class dome {
+public  class dome {
 
 	public static void main(String[] args) {
 		System.out.println("***********dome.class**********");
 		ClassLayout classLayout = ClassLayout.parseInstance(dome.class);
-		System.out.print(classLayout.toPrintable());
+//		System.out.print(classLayout.toPrintable());
 		System.out.println("***********dome.class**********");
-
+		 
 		System.out.println("***********new dome()**********");
 		dome d = new dome();
 //		d.hashCode();
 		ClassLayout classLayout1 = ClassLayout.parseInstance(d);
-		
 		System.out.print(classLayout1.toPrintable());
+		synchronized (d) {
+			ClassLayout classLayout3 = ClassLayout.parseInstance(d);
+			System.out.print(classLayout3.toPrintable());
+			System.out.println("ddd");
+		}
 		System.out.println("***********new dome()**********");
 		
 		System.out.println("***********new dome[10]**********");
 		ClassLayout classLayout2 = ClassLayout.parseInstance(new dome[10]);
-		System.out.print(classLayout2.toPrintable());
+//		System.out.print(classLayout2.toPrintable());
 		System.out.println("***********new dome[10]**********");
 	}
 

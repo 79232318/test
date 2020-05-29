@@ -1,0 +1,26 @@
+锁消除即删除不必要的加锁操作。根据代码逃逸技术，如果判断到一段代码中，堆上的数据不会逃逸出当前线程，那么可以认为这段代码是线程安全的，不必要加锁。看下面这段程序
+package com.paddx.test.concurrent;
+
+public class SynchronizedTest02 {
+
+    public static void main(String[] args) {
+        SynchronizedTest02 test02 = new SynchronizedTest02();
+        //启动预热
+        for (int i = 0; i < 10000; i++) {
+            i++;
+        }
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < 100000000; i++) {
+            test02.append("abc", "def");
+        }
+        System.out.println("Time=" + (System.currentTimeMillis() - start));
+    }
+
+    public void append(String str1, String str2) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(str1).append(str2);
+    }
+}
+虽然StringBuffer的append是一个同步方法，但是这段程序中的StringBuffer属于一个局部变量，并且不会从该方法中逃逸出去，所以其实这过程是线程安全的，可以将锁消除。下面是我本地执行的结果：
+
+为了尽量减少其他因素的影响，这里禁用了偏向锁（-XX:-UseBiasedLocking）。通过上面程序，可以看出消除锁以后性能还是有比较大提升的。

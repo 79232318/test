@@ -1,0 +1,74 @@
+Synchronized代码块同步在需要同步的代码块开始的位置插入monitorentry指令，在同步结束的位置或者异常出现的位置插入monitorexit指令；JVM要保证monitorentry和monitorexit都是成对出现的，任何对象都有一个monitor与之对应，当这个对象的monitor被持有以后，它将处于锁定状态。
+
+例如，同步代码块如下：
+
+public class SyncCodeBlock {
+   public int i;
+   public void syncTask(){
+       synchronized (this){
+           i++;
+       }
+   }
+}
+对同步代码块编译后的class字节码文件反编译，结果如下（仅保留方法部分的反编译内容）：
+
+  public void syncTask();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=3, args_size=1
+         0: aload_0
+         1: dup
+         2: astore_1
+         3: monitorenter  //注意此处，进入同步方法
+         4: aload_0
+         5: dup
+         6: getfield      #2             // Field i:I
+         9: iconst_1
+        10: iadd
+        11: putfield      #2            // Field i:I
+        14: aload_1
+        15: monitorexit   //注意此处，退出同步方法
+        16: goto          24
+        19: astore_2
+        20: aload_1
+        21: monitorexit //注意此处，退出同步方法
+        22: aload_2
+        23: athrow
+        24: return
+      Exception table:
+      //省略其他字节码.......
+可以看出同步方法块在进入代码块时插入了monitorentry语句，在退出代码块时插入了monitorexit语句，为了保证不论是正常执行完毕（第15行）还是异常跳出代码块（第21行）都能执行monitorexit语句，因此会出现两句monitorexit语句。
+
+（2）Synchronized修饰方法：
+
+Synchronized方法同步不再是通过插入monitorentry和monitorexit指令实现，而是由方法调用指令来读取运行时常量池中的ACC_SYNCHRONIZED标志隐式实现的，如果方法表结构（method_info Structure）中的ACC_SYNCHRONIZED标志被设置，那么线程在执行方法前会先去获取对象的monitor对象，如果获取成功则执行方法代码，执行完毕后释放monitor对象，如果monitor对象已经被其它线程获取，那么当前线程被阻塞。
+
+同步方法代码如下：
+
+public class SyncMethod {
+   public int i;
+   public synchronized void syncTask(){
+           i++;
+   }
+}
+对同步方法编译后的class字节码反编译，结果如下（仅保留方法部分的反编译内容）：
+
+public synchronized void syncTask();
+    descriptor: ()V
+    //方法标识ACC_PUBLIC代表public修饰，ACC_SYNCHRONIZED指明该方法为同步方法
+    flags: ACC_PUBLIC, ACC_SYNCHRONIZED
+    Code:
+      stack=3, locals=1, args_size=1
+         0: aload_0
+         1: dup
+         2: getfield      #2                  // Field i:I
+         5: iconst_1
+         6: iadd
+         7: putfield      #2                  // Field i:I
+        10: return
+      LineNumberTable:
+        line 12: 0
+        line 13: 10
+}
+可以看出方法开始和结束的地方都没有出现monitorentry和monitorexit指令，但是出现的ACC_SYNCHRONIZED标志位。

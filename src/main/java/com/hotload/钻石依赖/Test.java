@@ -16,7 +16,7 @@ public class Test {
         Class<?> depv1Class = v1.loadClass("Dep");
         Object depv1 = depv1Class.getConstructor().newInstance();
         depv1Class.getMethod("print").invoke(depv1);
-
+  
         Class<?> depv2Class = v2.loadClass("Dep");
         Object depv2 = depv2Class.getConstructor().newInstance();
         depv2Class.getMethod("print").invoke(depv2);

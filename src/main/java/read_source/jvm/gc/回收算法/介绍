@@ -1,0 +1,19 @@
+1.标记-清除算法
+2.复制算法(新生代回收算法)（Egen：s0：s1=8：1:1）
+3.标记整理算法(老年代回收算法)（old：跟标记清除算法一致，只是多了整理）
+4.分代收集算法
+在新生代中，每次垃圾回收都有大批对象死去，只有少量存活，因此我们采用复制算法；
+而老年代中对象存活率高、没有额外空间对它进行分配担保，就必须采用"标记-清理"或者"标记-整理"算法。
+
+面试题: 请问了解Minor GC和Full GC么，这两种GC有什么不一样吗？
+		Minor GC又称为新生代GC : 指的是发生在新生代的垃圾收集。因为Java对象大多都具备朝生夕灭的特性，因此Minor GC(采用复制算法)非常频繁，一般回收速度也比较快。
+		Full GC 又称为老年代GC或者Major GC : 指发生在老年代的垃圾收集。出现了Major GC，经常会伴随至少一次的Minor GC(并非绝对，在Parallel Scavenge收集器中就有直接进行Full GC的策略选择过程)。Major GC的速度一般会比Minor GC慢10倍以上
+
+GC shortname		回收区域	JVM参数					描述
+Copy				新生代	-XX:+UseSerialGC		即Serial收集器，使用复制算法，单线程。sun jdk默认的gc
+MarkSweepCompact	老生代	-XX:+UseSerialGC		即Serial old，Serial收集器的老年代版本，使用标记-清除算法，单线程。sun jdk默认的gc
+ParNew				新生代	-XX:+UseParNewGC		Serial收集器的多线程版本。
+ConcurrentMarkSweep	老生代	-XX:+UseConcMarkSweepGC	Serial old收集器的多线程版本。（能否与ParNew一块使用，我待会试一下再说）
+PS Scavenge			新生代	-XX:+UseParallelGC		虽然跟ParNew一样都是采用复制算法的多线程gc收集器。但其具有可以配置吞吐量优先的特点和自适应调节新生代大小、eden与survivor比例等功能。它关注吞吐量，所以可以更高效率地利用cpu，而ParNew更关注停顿时间，适合需要与用户交互的程序。
+PS MarkSweep		老生代	-XX:+UseParallelGC		PS Scavenge的老年代版本。标记-整理算法、多线程，并且支持吞吐量优先以及自适应。
+
